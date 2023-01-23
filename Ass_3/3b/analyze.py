@@ -26,8 +26,9 @@ def get_book_stats(book_paths):
 """
 un-comment below to run code and see  awnsers in terminal logs
 """
-#i = get_book_stats(book_paths)
-#print(i, 'book stats')
+i = get_book_stats(book_paths)
+print(i, 'book stats')
+print('\n')
 
 
 
@@ -50,7 +51,6 @@ def get_book_with_highest_stats(book_stats : dict) -> dict:
     highest_vocab = 0
     highest_chap = 0
     for k, v in book_stats.items():
-        print(k, v['num_tokens'], v['num_chaps'], v['num_sentences'], v['vocab_size'])
         if v['num_tokens'] > highest_tok:
             highest_tok = v['num_tokens']
             stats2book_with_highest_value['num_tokens'] = k
@@ -72,8 +72,9 @@ def get_book_with_highest_stats(book_stats : dict) -> dict:
 """
 un-comment below to run code and see  awnsers in terminal logs
 """
-#i = get_book_with_highest_stats(i)
-#print(i)
+i = get_book_with_highest_stats(i)
+print(i, 'book highest stats')
+print('\n')
 
 def edited_get_book_stats(book_paths):
     """
@@ -97,5 +98,5 @@ def edited_get_book_stats(book_paths):
 un-comment below to run code and see  awnsers in terminal logs
 """
 i = edited_get_book_stats(book_paths)
-for k, v in i.items():
-    print(k, v, 'edited')
+print(i, 'edited with text files in ./Data/out/*.txt')
+print('\n')
