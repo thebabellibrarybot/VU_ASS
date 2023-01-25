@@ -1,7 +1,10 @@
 import pandas as pd
 from nltk import tokenize as tok
+import nltk 
+import re
 
 tsv_path = './Data/DT_FB.csv.tsv'
+nltk.download('punkt')
 
 #1a
 def read_csv(tsv_path, delimiter = ','):
@@ -28,11 +31,9 @@ def read_csv(tsv_path, delimiter = ','):
         csv_dic['status_type'] = df['status_type'][i]
         csv_dic_ls.append((csv_dic))
     return csv_dic_ls
-
 status_update = read_csv(tsv_path)
-#print(i)
+#print(status_update)
 
-#TODO all the below functions need to reference 'status_updates' not 'tsv_path'... aka read lists not files.tsv
 
 #1b
 def get_update_most_responded_to(status_update, kwarg):
@@ -63,44 +64,53 @@ def get_update_most_responded_to(status_update, kwarg):
 #i = get_update_most_responded_to(status_update, 'hahas')
 #print(i)
 
+
 #1c
 def get_logest_update(status_updates, length_type = "tokens"):
 
-    df = pd.read_csv(tsv_path, sep='\t')
     longest = 0
     longest_update = ''
 
-    for i in df.index:
+    for i, item in enumerate(status_updates):
 
         if length_type == 'tokens':
-            longest_tok = tok.word_tokenize(str(df['status_message'][i]))
+            longest_tok = tok.word_tokenize(str(status_updates[i]['status_message']))
             if len(longest_tok) > longest:
                 longest = len(longest_tok)
-                longest_update = df['status_message'][i]
+                longest_update = status_updates[i]
 
         elif length_type == 'sentences':
-            longest_sent = tok.sent_tokenize(str(df['status_message'][i]))
+            longest_sent = tok.sent_tokenize(str(status_updates[i]['status_message']))
             if len(longest_sent) > longest:
                 longest = len(longest_sent)
-                longest_update = df['status_message'][i]
+                longest_update = status_updates[i]
 
         elif length_type == 'characters':
-            longest_chars = (str(df['status_message'][i]))
+            longest_chars = (str(status_updates[i]['status_message']))
             if len(longest_chars) > longest:
                 longest = len(longest_chars)
-                longest_update = df['status_message'][i]    
-            
+                longest_update = status_updates[i] 
+    print(longest)
     return (longest_update)
-
-
-#i = get_logest_update(tsv_path, 'tokens')
+#i = get_logest_update(status_update, 'tokens')
 #print(i)
 
-#1d
-def get_updates_with_keywords(tsv_path, keywords, case_sensitive = False):
 
+#1d
+def get_updates_with_keywords(status_update, keywords, case_sensitive = False):
     
-    filtered_status_updates = ''
+    filtered_status_updates = []
+
+    for i, item in enumerate(status_update):
+        values = [str(v) for v in status_update[i].values()]
+        result = ' '.join(values)
+        if case_sensitive == True:
+            if any(keywords in result for keyword in keywords):
+                filtered_status_updates.append(status_update[i])
+        if case_sensitive == False:
+            if any(re.search(keyword, result, re.IGNORECASE) for keyword in keywords):
+                filtered_status_updates.append(status_update[i])
 
     return filtered_status_updates
-# i = get_updates_with_keywords(tsv_path, keywords, case_sensitive)
+#i = get_updates_with_keywords(status_update, keywords = 'hillary', case_sensitive=True)
+#print(i)
