@@ -1,19 +1,16 @@
 import requests
+import os
+import json
 
 #2a
-# Download data on prizes
 api_url = "http://api.nobelprize.org/v1/prize.json"
 r = requests.get(api_url)
 dict_prizes = r.json()
-# uncomment the line below if you'd like to see what's inside dict_prizes
-#dict_prizes 
 
-# Download data on laureates
 api_url = "http://api.nobelprize.org/v1/laureate.json"
 r = requests.get(api_url)
 dict_laureates = r.json()
-# uncomment the line below if you'd like to see what's inside dict_prizes
-#dict_laureates 
+
 
 #2b
 def get_laureates(dict_prizes, year = None, category = None):
@@ -52,4 +49,43 @@ def get_laureates(dict_prizes, year = None, category = None):
                         winning_laureates.append((id['firstname'] + ' ' + id['surname']))
     return winning_laureates
 i = get_laureates(dict_prizes, year = 2008, category='peace')
-print(i)
+#print(i)
+
+#2c
+def get_affiliation_prizes(dict_laureates):
+
+    affilliation_dic = {}
+
+    for laur in dict_laureates['laureates']:
+        for prize in laur['prizes']:
+            cat_years = {}
+            cat_years["category"] = prize["category"]
+            cat_years["year"] = prize["year"]
+            for affilliation in prize["affiliations"]:
+                if type(affilliation) == list:
+                    continue
+                else: 
+                    if affilliation["name"] in affilliation_dic:
+                        affilliation_dic[affilliation["name"]].append(cat_years)
+                    else:
+                        affilliation_dic[affilliation["name"]] = [cat_years]
+    return affilliation_dic
+
+i = get_affiliation_prizes(dict_laureates)
+#print(i)
+
+#2d
+def write_to_json(dic):
+
+    path = './Data/json_data/NobelPrize/'
+    if not os.path.exists(path):
+        os.makedirs(path)
+
+
+    with open('./Data/json_data/NobelPrize/nobel_prizes_affiliations.json', "w") as fi:
+        
+        fi.write(json.dumps(dic))
+
+    return True
+
+#write_to_json(i)
