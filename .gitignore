@@ -1,1 +1,8 @@
 .ipynb_checkpoints
+/Data
+*.xml
+*.zip
+*.html
+*.dtd
+*.tsv
+*.txt
