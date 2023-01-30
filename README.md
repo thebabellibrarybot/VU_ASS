@@ -38,3 +38,6 @@
 ```
 
 *** please review file structure to find appropriate places to import test data
+
+for reqs run bash command
+`pip freeze reqs.txt`
