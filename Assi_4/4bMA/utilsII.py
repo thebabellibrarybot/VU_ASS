@@ -2,6 +2,17 @@ import os
 from utils import load_root, get_talks
 
 def map_languages_to_paths(dir):
+    """
+    param
+    -----
+    dir 
+        str : dir
+    
+    result
+    ------
+    dic
+        dic : lang name key and path value
+    """
     lang_path = {}
     for i in os.listdir(dir):
         if i.endswith('.xml'):
@@ -9,7 +20,6 @@ def map_languages_to_paths(dir):
     return lang_path
 
 def find_coverage(lang_dic, num_lang = 'most'):
-
     """
     params
     ------
@@ -49,10 +59,10 @@ def get_id_title_dict(en_path):
     talks = get_talks(root)
     en_talks = {}
     for num, el in enumerate(talks):
-        talkid = el.find('head').find('title').text
-        talktitle = int(el.find('head').find('talkid').text)
+        talktitle = el.find('head').find('title').text
+        talkid = int(el.find('head').find('talkid').text)
         en_talks[talkid] = talktitle
-    return dict(sorted(en_talks.items(), key = lambda item: item[1], reverse=True))
+    return en_talks
 
 def map_talks_to_languages(lang_dic):
     """
@@ -126,7 +136,41 @@ def find_top_coverage(talks_lang):
     return
     ------
     top_coverage
-        dic : key is talk_titles by most/lease value is a list on langs talk is translated into 
+        dic 
     """
-    
-    return 'top_coverage'
+    i = map_talks_to_languages(talks_lang)
+        
+    #i = find_top_coverage(i)
+    most = 0
+    least = None
+    most_talk = ''
+    least_talk = ''
+    ml_dic = {}
+
+    for k, v in i.items():
+        if least == None:
+            least = int(len(v))
+        else:
+            if int(len(v)) < least:
+                least = int(len(v))
+                talkid = k
+                least_talk = (k, v)
+
+            elif int(len(v)) > most:
+                most = int(len(v))
+                talkid = k
+                most_talk = (k,v)
+
+    for talk in [most_talk, least_talk]:
+        new_path = './Data/XML_releases/xml/ted_{}-20160408.xml'.format(talk[1][0])
+        talk_titles = get_id_title_dict(new_path)
+        title = talk_titles.get(talk[0])
+        ml_dic[title] = talk[1]
+        
+    for k, v in ml_dic.items():
+        if len(v) > 1:
+            print('the most translated talk is {}, which is translated into {} languages'.format(k, len(v)))
+        else:
+            print('the least translated talk is {}, wich is translated into {} language(s)'.format(k, len(v)))
+         
+    return ml_dic
