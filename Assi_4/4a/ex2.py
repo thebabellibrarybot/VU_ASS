@@ -22,6 +22,15 @@ def get_laureates(dict_prizes, year = None, category = None):
     ---------
     dict_prizes : dict
         a dict of the prizes and years and stuff
+    year : kwarg
+        int year to search for
+    category : kwarg
+        str category to search for 
+
+    returns
+    ------
+    winning_laureates 
+        list : list of wining laureates
     """
     
     winning_laureates = []

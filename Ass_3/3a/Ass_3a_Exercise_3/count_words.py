@@ -26,7 +26,7 @@ Don't forget to add docstrings to your functions.
 from utils import utils_3a
 
 def my_word_counter (text : str) -> str:
-    text = utils_3a.remove_punc(text)
+    text = utils_3a.preprocess(text)
     counter = {}
 
     for word in text:

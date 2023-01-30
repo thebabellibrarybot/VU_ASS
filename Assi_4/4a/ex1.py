@@ -67,6 +67,19 @@ def get_update_most_responded_to(status_update, kwarg):
 
 #1c
 def get_logest_update(status_updates, length_type = "tokens"):
+    """
+    params
+    ------
+    status_updates
+        csv_reader : reader of all status_updatses
+    len_type
+        kwarg : kwarg for type of longest updated searched for ['tokens', 'sentences', 'characters']
+
+    returns 
+    -------
+    longest_update
+        update with the longest of ['tokens', 'sentences', 'characters']
+    """
 
     longest = 0
     longest_update = ''
@@ -98,6 +111,21 @@ def get_logest_update(status_updates, length_type = "tokens"):
 
 #1d
 def get_updates_with_keywords(status_update, keywords, case_sensitive = False):
+    """
+    params
+    ------
+    status update
+        csv_reader : reader of csv w/ status updates
+    kewaords
+        str : keyword to search for
+    case_sensitive
+        Boolean : toggle case_sensitivity on/off
+    
+    returns
+    -------
+    filted_status_updates
+        list : status_updates with kewords
+    """
     
     filtered_status_updates = []
 

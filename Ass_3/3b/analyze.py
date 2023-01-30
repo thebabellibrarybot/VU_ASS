@@ -26,9 +26,8 @@ def get_book_stats(book_paths):
 """
 un-comment below to run code and see  awnsers in terminal logs
 """
-i = get_book_stats(book_paths)
-print(i, 'book stats')
-print('\n')
+#i = get_book_stats(book_paths)
+#print(i, 'book stats')
 
 
 
@@ -72,9 +71,8 @@ def get_book_with_highest_stats(book_stats : dict) -> dict:
 """
 un-comment below to run code and see  awnsers in terminal logs
 """
-i = get_book_with_highest_stats(i)
-print(i, 'book highest stats')
-print('\n')
+#book2stats = get_book_with_highest_stats(i)
+#print(book2stats, 'book highest stats')
 
 def edited_get_book_stats(book_paths):
     """
@@ -97,6 +95,5 @@ def edited_get_book_stats(book_paths):
 """
 un-comment below to run code and see  awnsers in terminal logs
 """
-i = edited_get_book_stats(book_paths)
-print(i, 'edited with text files in ./Data/out/*.txt')
-print('\n')
+#stats2book_with_highest_value = edited_get_book_stats(book_paths)
+#print(stats2book_with_highest_value, 'edited with text files in ./Data/out/*.txt')

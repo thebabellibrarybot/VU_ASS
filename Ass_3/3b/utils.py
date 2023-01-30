@@ -3,24 +3,37 @@ from nltk import tokenize as tok
 import re
 
 def get_paths(input_folder : str) -> str:
+    """
+    params
+    ------
+    input_folder
+        path : path to folder with data
+
+    returns
+    -------
+    file_ls
+        list : list of file paths
+    """
     file_ls = []
     for file in os.listdir(input_folder):
         file_ls.append(file)
     return file_ls
 
 def get_basic_stats(book_path : str) -> str:
-
-    # num of sentences
-
-    # num of tokens
-
-    # size of vocabulary i.e. unique tokens
-
-    # occurances of CHAPTER in huck, Chapter in anna, ACT in macbeth
-
+    """
+    params
+    ------
+    book_path
+        str : path to books
+    
+    returns
+    -------
+    stat_dic
+        dic : dictionary with stats on each book
+    """
     stat_dic = {}
 
-    with open(book_path, 'r') as cur_book:
+    with open(book_path, 'r', encoding='utf-8') as cur_book:
         num_sentences = 0
         num_tokens = 0
         num_chaps = 0
@@ -45,18 +58,20 @@ def get_basic_stats(book_path : str) -> str:
     return stat_dic
 
 def edited_get_basic_stats(book_path : str) -> str:
-    # num of sentences
+    """
+    params
+    -----
+    book_path
+        str : path to data files
 
-    # num of tokens
-
-    # size of vocabulary i.e. unique tokens
-
-    # occurances of CHAPTER in huck, Chapter in anna, ACT in macbeth
-
-    # top_30_tokens
+    returns 
+    -------
+    stat_dic
+        dic : dic with stats for each book including top_30_tokens
+    """
     stat_dic = {}
 
-    with open(book_path, 'r') as cur_book:
+    with open(book_path, 'r', encoding='utf-8') as cur_book:
         num_sentences = 0
         num_tokens = 0
         num_unique_tokens = {}
