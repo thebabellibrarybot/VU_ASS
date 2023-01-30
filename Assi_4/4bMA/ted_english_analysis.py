@@ -25,10 +25,10 @@ def find_xml_info(talk_els, len = None, time = None):
     speaker
         dict : {speaker: (title, id)}
     """
-    one = find_wc(talk_els, len = 'shortest')
-    two = find_date(talk_els, time  = 'latest')
+    one = find_wc(talk_els, len)
+    two = find_date(talk_els, time)
     three = find_speaker(talk_els)
     return  one, two, three 
 
-i = find_xml_info(talk_els=talks)
+i = find_xml_info(talk_els=talks, len = 'shortest', time = 'latest')
 print(i)
