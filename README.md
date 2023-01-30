@@ -1,10 +1,8 @@
-# Heading 2
-Hello VU:
+# Hello VU:
 
-# Heading 3
-file structure:
+### file structure:
 
-`foreach()`
+
 ```python
     VU_ASS
     - Ass_3 (all assignments from 3)
