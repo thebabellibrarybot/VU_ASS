@@ -17,7 +17,7 @@ VU_ASS
                 - books (place all books.txt in this folder)
                 - out (output .txt files will appear in this folder)
             - analyze.py
-            - utils.py
+            - utils.py (utils for analyze)
     
     -Assi_4
         - 4a
