@@ -1,8 +1,12 @@
+# Heading 2
 Hello VU:
 
+# Heading 3
 file structure:
 
-VU_ASS
+`foreach()`
+```python
+    VU_ASS
     - Ass_3 (all assignments from 3)
         - 3a
             - Ass_3a.ipynb (most of the work for 3a is in this jupyter notebook)
@@ -33,6 +37,6 @@ VU_ASS
             - ted_translation_analysis.py
             - utils.py (for t_e_a.py)
             - utilsII (for t_t_a.py)
-
+```
 
 *** please review file structure to find appropriate places to import test data
